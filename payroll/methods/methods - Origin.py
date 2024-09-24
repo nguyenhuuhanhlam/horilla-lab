@@ -288,11 +288,6 @@ def get_daily_salary(wage, wage_date) -> dict:
     """
     This method is used to calculate daily salary for the date
     """
-
-    # DEBUG
-    print("---> get_daily_salary")
-    # END-DEBUG
-
     last_day = calendar.monthrange(wage_date.year, wage_date.month)[1]
     end_date = date(wage_date.year, wage_date.month, last_day)
     start_date = date(wage_date.year, wage_date.month, 1)
@@ -372,11 +367,6 @@ def monthly_computation(employee, wage, start_date, end_date):
         start_date (obj): start of the pay period
         end_date (obj): end date of the period
     """
-
-    # DEBUG
-    print("---> monthly_computation")
-    # END-DEBUG
-
     basic_pay = 0
     month_data = months_between_range(wage, start_date, end_date)
 
@@ -529,11 +519,6 @@ def save_payslip(**kwargs):
     """
     This method is used to save the generated payslip
     """
-
-    # DEBUG
-    print("---> save_payslip")
-    # END-DEBUG
-
     filtered_instance = Payslip.objects.filter(
         employee_id=kwargs["employee"],
         start_date=kwargs["start_date"],
@@ -551,11 +536,6 @@ def save_payslip(**kwargs):
     instance.deduction = round(kwargs["deduction"], 2)
     instance.net_pay = round(kwargs["net_pay"], 2)
     instance.pay_head_data = kwargs["pay_data"]
-
-    # RECALC
-    instance.pay_head_data["loss_of_pay"] = instance.pay_head_data["gross_pay"] / instance.pay_head_data["paid_days"]
-    # END-RECALC
-
     instance.save()
     instance.installment_ids.set(kwargs["installments"])
     return instance

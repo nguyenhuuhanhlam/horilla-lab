@@ -117,6 +117,10 @@ def payroll_calculation(employee, start_date, end_date):
         dict: A dictionary containing the calculated payroll components:
     """
 
+    # DEBUG
+    print("---> payroll_calculation")
+    # END-DEBUG
+
     basic_pay_details = compute_salary_on_period(employee, start_date, end_date)
     contract = basic_pay_details["contract"]
     contract_wage = basic_pay_details["contract_wage"]
@@ -709,6 +713,11 @@ def generate_payslip(request):
     Requires the user to be logged in and have the 'payroll.add_payslip' permission.
 
     """
+
+    # DEBUG
+    print("---> generate_payslip")
+    # END-DEBUG
+
     payslips = []
     json_data = []
     form = forms.GeneratePayslipForm()
@@ -781,6 +790,11 @@ def create_payslip(request, new_post_data=None):
     Returns:
         A rendered HTML template for the payslip creation form.
     """
+
+    # DEBUG
+    print("---> create_payslip")
+    # END-DEBUG
+
     if new_post_data:
         request.POST = new_post_data
     form = forms.PayslipForm()

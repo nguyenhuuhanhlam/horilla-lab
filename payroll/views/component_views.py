@@ -212,6 +212,12 @@ def payroll_calculation(employee, start_date, end_date):
     for deduction in update_net_pay_deductions:
         net_pay_deduction_list.append(deduction)
     net_pay = net_pay - net_pay_deductions["net_deduction"]
+
+    # --->
+    lab_loss_of_pay = gross_pay / paid_days * unpaid_days
+    lab_total_deductions = lab_loss_of_pay + total_deductions
+    # ---|
+
     payslip_data = {
         "employee": employee,
         "contract_wage": contract_wage,
@@ -228,8 +234,8 @@ def payroll_calculation(employee, start_date, end_date):
         "post_tax_deductions": post_tax_deductions["post_tax_deductions"],
         "tax_deductions": tax_deductions["tax_deductions"],
         "net_deductions": net_pay_deduction_list,
-        "total_deductions": total_deductions,
-        "loss_of_pay": loss_of_pay,
+        "total_deductions": lab_total_deductions, # --->
+        "loss_of_pay": lab_loss_of_pay, # --->
         "federal_tax": federal_tax,
         "start_date": start_date,
         "end_date": end_date,
@@ -242,6 +248,7 @@ def payroll_calculation(employee, start_date, end_date):
     json_data = json.dumps(data_to_json)
 
     payslip_data["json_data"] = json_data
+
     payslip_data["installments"] = installments
     return payslip_data
 
@@ -836,7 +843,13 @@ def create_payslip(request, new_post_data=None):
                 data["pay_data"] = json.loads(payslip_data["json_data"])
                 calculate_employer_contribution(data)
                 data["installments"] = payslip_data["installments"]
+                
+                # --->
+                # data["pay_data"]["loss_of_pay"] = data["pay_data"]["gross_pay"] / data["pay_data"]["paid_days"] * data["pay_data"]["unpaid_days"]
+                # ---|
+
                 payslip_data["instance"] = save_payslip(**data)
+
                 form = forms.PayslipForm()
                 messages.success(request, _("Payslip Saved"))
                 payslip = payslip_data["instance"]
@@ -853,6 +866,7 @@ def create_payslip(request, new_post_data=None):
                     ),
                     icon="close",
                 )
+
                 return render(
                     request,
                     "payroll/payslip/individual_payslip.html",

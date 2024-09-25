@@ -530,10 +530,6 @@ def save_payslip(**kwargs):
     This method is used to save the generated payslip
     """
 
-    # DEBUG
-    print("---> save_payslip")
-    # END-DEBUG
-
     filtered_instance = Payslip.objects.filter(
         employee_id=kwargs["employee"],
         start_date=kwargs["start_date"],
@@ -551,10 +547,6 @@ def save_payslip(**kwargs):
     instance.deduction = round(kwargs["deduction"], 2)
     instance.net_pay = round(kwargs["net_pay"], 2)
     instance.pay_head_data = kwargs["pay_data"]
-
-    # RECALC
-    instance.pay_head_data["loss_of_pay"] = instance.pay_head_data["gross_pay"] / instance.pay_head_data["paid_days"] * instance.pay_head_data["unpaid_days"]
-    # END-RECALC
 
     instance.save()
     instance.installment_ids.set(kwargs["installments"])

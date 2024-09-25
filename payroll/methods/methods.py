@@ -553,9 +553,10 @@ def save_payslip(**kwargs):
     instance.pay_head_data = kwargs["pay_data"]
 
     # RECALC
-    instance.pay_head_data["loss_of_pay"] = instance.pay_head_data["gross_pay"] / instance.pay_head_data["paid_days"]
+    instance.pay_head_data["loss_of_pay"] = instance.pay_head_data["gross_pay"] / instance.pay_head_data["paid_days"] * instance.pay_head_data["unpaid_days"]
     # END-RECALC
 
     instance.save()
     instance.installment_ids.set(kwargs["installments"])
+
     return instance

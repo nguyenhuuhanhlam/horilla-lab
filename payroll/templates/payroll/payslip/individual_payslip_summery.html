@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %} {% load humanize %}
 {% if messages %}
 <div class="oh-wrapper">
   {% for message in messages %}
@@ -54,7 +54,7 @@
         {% if position == "prefix" %}
           <span class="oh-payslip__netpay-amount">{{ currency }} {{ net_pay|floatformat:2 }}</span>
         {% else %}
-          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat:2 }} {{ currency }}</span>
+          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat:2|intcomma }} {{ currency }}</span>
         {% endif %}
           <span class="oh-payslip__netpay-title">{% trans "Employee Net Pay" %}</span>
       </div>

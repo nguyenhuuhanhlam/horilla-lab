@@ -276,8 +276,8 @@ def daily_computation(employee, wage, start_date, end_date):
         fixed_penalty = contract.deduction_for_one_leave_amount
         loss_of_pay = (unpaid_leaves) * fixed_penalty
     if contract.deduct_leave_from_basic_pay:
-        basic_pay = basic_pay - loss_of_pay
-
+        basic_pay = basic_pay
+        
     return {
         "basic_pay": basic_pay,
         "loss_of_pay": loss_of_pay,

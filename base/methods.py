@@ -841,7 +841,12 @@ def get_working_days(start_date, end_date):
         if start_date <= date <= end_date
     ]
 
-    working_days_between_ranges = list(set(date_range) - set(company_leave_dates))
+    # --->
+    working_days_between_ranges = [
+        date for date in set(date_range) - set(company_leave_dates)
+        if date.weekday() < 5  # Loại trừ thứ 7 và Chủ nhật
+    ]
+
     total_working_days = len(working_days_between_ranges)
 
     return {

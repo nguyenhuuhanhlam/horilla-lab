@@ -141,7 +141,7 @@ def payroll_calculation(employee, start_date, end_date):
         float(loss_of_pay) if not contract.deduct_leave_from_basic_pay else 0
     )
 
-    basic_pay = basic_pay - loss_of_pay_amount
+    basic_pay = basic_pay # --->
 
     kwargs = {
         "employee": employee,
@@ -214,8 +214,9 @@ def payroll_calculation(employee, start_date, end_date):
     net_pay = net_pay - net_pay_deductions["net_deduction"]
 
     # --->
-    lab_loss_of_pay = gross_pay / paid_days * unpaid_days
+    lab_loss_of_pay = gross_pay / (paid_days + unpaid_days) * unpaid_days
     lab_total_deductions = lab_loss_of_pay + total_deductions
+    lab_net_pay = gross_pay - lab_total_deductions
     # ---|
 
     payslip_data = {
@@ -224,7 +225,7 @@ def payroll_calculation(employee, start_date, end_date):
         "basic_pay": basic_pay,
         "gross_pay": gross_pay,
         "taxable_gross_pay": taxable_gross_pay["taxable_gross_pay"],
-        "net_pay": net_pay,
+        "net_pay": lab_net_pay, # --->
         "allowances": allowances["allowances"],
         "paid_days": paid_days,
         "unpaid_days": unpaid_days,
@@ -844,10 +845,6 @@ def create_payslip(request, new_post_data=None):
                 calculate_employer_contribution(data)
                 data["installments"] = payslip_data["installments"]
                 
-                # --->
-                # data["pay_data"]["loss_of_pay"] = data["pay_data"]["gross_pay"] / data["pay_data"]["paid_days"] * data["pay_data"]["unpaid_days"]
-                # ---|
-
                 payslip_data["instance"] = save_payslip(**data)
 
                 form = forms.PayslipForm()

@@ -289,10 +289,6 @@ def get_daily_salary(wage, wage_date) -> dict:
     This method is used to calculate daily salary for the date
     """
 
-    # DEBUG
-    print("---> get_daily_salary")
-    # END-DEBUG
-
     last_day = calendar.monthrange(wage_date.year, wage_date.month)[1]
     end_date = date(wage_date.year, wage_date.month, last_day)
     start_date = date(wage_date.year, wage_date.month, 1)
@@ -373,10 +369,6 @@ def monthly_computation(employee, wage, start_date, end_date):
         end_date (obj): end date of the period
     """
 
-    # DEBUG
-    print("---> monthly_computation")
-    # END-DEBUG
-
     basic_pay = 0
     month_data = months_between_range(wage, start_date, end_date)
 
@@ -438,7 +430,7 @@ def monthly_computation(employee, wage, start_date, end_date):
         loss_of_pay = (unpaid_leaves) * fixed_penalty
 
     if contract.deduct_leave_from_basic_pay:
-        basic_pay = basic_pay - loss_of_pay
+        basic_pay = basic_pay
     return {
         "basic_pay": basic_pay,
         "loss_of_pay": loss_of_pay,

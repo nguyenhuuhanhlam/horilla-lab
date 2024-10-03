@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}  {% load humanize %}
 {% load i18n %}
 {% if messages %}
 <div class="oh-wrapper">
@@ -138,23 +138,23 @@
           </div>
           {% if position == "prefix" %}
             <div data-cell-index="5" class="oh-sticky-table__td">
-              {{currency}} {{payslip.gross_pay|floatformat:2}}
+              {{currency}} {{payslip.gross_pay|floatformat}}
             </div>
             <div data-cell-index="6" class="oh-sticky-table__td">
-              {{currency}} {{payslip.deduction|floatformat:2}}
+              {{currency}} {{payslip.deduction|floatformat}}
             </div>
             <div data-cell-index="7" class="oh-sticky-table__td">
               {{currency}} {{payslip.net_pay|floatformat:2}}
             </div>
           {% else %}
             <div data-cell-index="5" class="oh-sticky-table__td">
-              {{payslip.gross_pay|floatformat:2}} {{currency}}
+              {{payslip.gross_pay|floatformat|intcomma}} {{currency}}
             </div>
             <div data-cell-index="6" class="oh-sticky-table__td">
-              {{payslip.deduction|floatformat:2}} {{currency}}
+              {{payslip.deduction|floatformat|intcomma}} {{currency}}
             </div>
             <div data-cell-index="7" class="oh-sticky-table__td">
-              {{payslip.net_pay|floatformat:2}} {{currency}}
+              {{payslip.net_pay|floatformat|intcomma}} {{currency}}
             </div>
           {% endif %}
           {% if perms.payroll.add_payslip %}

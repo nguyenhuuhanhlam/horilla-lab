@@ -52,9 +52,9 @@
     <div class="oh-payslip__netpay" style="text-align:left; border-radius: 15px; border: 1px solid hsl(213,22%,84%);">
       <div style="border-radius: 15px; background-color: #d2f8d7; padding: 10px; border-left: 3px solid #00cc66;">
         {% if position == "prefix" %}
-          <span class="oh-payslip__netpay-amount">{{ currency }} {{ net_pay|floatformat:2 }}</span>
+          <span class="oh-payslip__netpay-amount">{{ currency }} {{ net_pay|floatformat}}</span>
         {% else %}
-          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat:2|intcomma }} {{ currency }}</span>
+          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat|intcomma }} {{ currency }}</span>
         {% endif %}
           <span class="oh-payslip__netpay-title">{% trans "Employee Net Pay" %}</span>
       </div>
@@ -62,16 +62,16 @@
           {% if position == "prefix" %}
             <span class="oh-payslip__netpay-title">{% trans "Actual Basic Pay" %} <small style="margin-left:36px; font-weight:bold;">: {{currency}} {{instance.contract_wage}}</small></span>
           {% else %}
-            <span class="oh-payslip__netpay-title">{% trans "Actual Basic Pay" %} <small style="margin-left:36px; font-weight:bold;">: {{instance.contract_wage}} {{currency}}</small></span>
+            <span class="oh-payslip__netpay-title">{% trans "Actual Basic Pay" %} <small style="margin-left:36px; font-weight:bold;">: {{instance.contract_wage|floatformat|intcomma}} {{currency}}</small></span>
           {% endif %}
           <span class="oh-payslip__netpay-title">{% trans "Paid Days" %} <small style="margin-left:86px;font-weight:bold;">: {{paid_days}}</small> </span>
           <span class="oh-payslip__netpay-title">{% trans "LOP Days" %} <small style="margin-left:93px ;font-weight:bold;">: {{unpaid_days}}</small> </span>
           <span class="oh-payslip__netpay-title">
               {% trans "Updated Basic Pay" %}
                 {% if position == "prefix" %}
-                  <small style="margin-left:20px;font-weight:bold;">: {{currency}} {{basic_pay|floatformat:2}}
+                  <small style="margin-left:20px;font-weight:bold;">: {{currency}} {{basic_pay|floatformat}}
                 {% else %}
-                  <small style="margin-left:20px;font-weight:bold;">: {{basic_pay|floatformat:2}} {{currency}}
+                  <small style="margin-left:20px;font-weight:bold;">: {{basic_pay|floatformat|intcomma}} {{currency}}
                 {% endif %}
 
                 <br><i style="font-style: italic; margin-left: 10px; font-weight: normal;"><ion-icon name="information-circle-outline" style="color:blue;"></ion-icon>{% trans "The payslip is calculated based on the updated basic pay" %}</i>
@@ -116,7 +116,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td" colspan="2">
-              {{basic_pay|floatformat:2}} {{currency}}
+              {{basic_pay|floatformat|intcomma}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -129,7 +129,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{allowance.amount|floatformat:2}} {{currency}}
+              {{allowance.amount|floatformat|intcomma}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -149,7 +149,7 @@
             </th>
           {% else %}
             <th class="oh-payslip__table-tf">
-              {{gross_pay|floatformat:2}} {{currency}}
+              {{gross_pay|floatformat|intcomma}} {{currency}}
             </th>
           {% endif %}
         </tr>
@@ -182,7 +182,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{loss_of_pay|floatformat:2}} {{currency}}
+              {{loss_of_pay|floatformat|intcomma}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -208,7 +208,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{deduction.amount|floatformat:2}} {{currency}}
+              {{deduction.amount|floatformat}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -221,7 +221,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{deduction.amount|floatformat:2}} {{currency}}
+              {{deduction.amount|floatformat|intcomma}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -248,7 +248,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{federal_tax|floatformat:2}} {{currency}}
+              {{federal_tax|floatformat|intcomma}} {{currency}}
             </td>
           {% endif %}
         </tr>
@@ -275,7 +275,7 @@
             </td>
           {% else %}
             <td class="oh-payslip__table-td">
-              {{currency}}{{deduction.amount|floatformat:2}}
+              {{currency}}{{deduction.amount|floatformat|intcomma}}
             </td>
           {% endif %}
         </tr>
@@ -291,11 +291,11 @@
           </th>
           {% if position == "prefix" %}
             <th class="oh-payslip__table-tf">
-              {{currency}} {{total_deductions|floatformat:2}}
+              {{currency}} {{total_deductions|floatformat|intcomma}}
             </th>
           {% else %}
             <th class="oh-payslip__table-tf">
-              {{total_deductions|floatformat:2}} {{currency}}
+              {{total_deductions|floatformat|intcomma}} {{currency}}
             </th>
           {% endif %}
         </tr>
@@ -318,7 +318,7 @@
       {% if position == "prefix" %}
         <span class="oh-payslip__net-payable-amount">{{currency}} {{net_pay|floatformat:2}}</span>
       {% else %}
-        <span class="oh-payslip__net-payable-amount">{{net_pay|floatformat:2}} {{currency}}</span>
+        <span class="oh-payslip__net-payable-amount">{{net_pay|floatformat|intcomma}} {{currency}}</span>
       {% endif %}
     </div>
   </div>

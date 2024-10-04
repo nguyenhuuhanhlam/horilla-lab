@@ -1,4 +1,4 @@
-{% load i18n %} {% load yes_no %}{% load static %}
+{% load i18n %} {% load yes_no %}{% load static %} {%load humanize %}
 {% include 'filter_tags.html' %}
 {% if messages %}
 <div class="oh-wrapper">
@@ -85,7 +85,7 @@
             </div>
             <div data-cell-index="7" class="oh-sticky-table__td">
               {% if deduction.amount %}
-                {{deduction.amount}}
+                {{deduction.amount|floatformat|intcomma}}
               {% endif %}
             </div>
             <div data-cell-index="8" class="oh-sticky-table__td">

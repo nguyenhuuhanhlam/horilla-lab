@@ -54,7 +54,7 @@
         {% if position == "prefix" %}
           <span class="oh-payslip__netpay-amount">{{ currency }} {{ net_pay|floatformat}}</span>
         {% else %}
-          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat|intcomma }} {{ currency }}</span>
+          <span class="oh-payslip__netpay-amount">{{ net_pay|floatformat|intcomma}} {{ currency }}</span>
         {% endif %}
           <span class="oh-payslip__netpay-title">{% trans "Employee Net Pay" %}</span>
       </div>

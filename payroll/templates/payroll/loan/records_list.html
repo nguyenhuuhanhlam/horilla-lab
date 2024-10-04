@@ -1,4 +1,4 @@
-{% load i18n %} {% load static %}{% include "filter_tags.html" %}
+{% load i18n %} {% load static %}{% include "filter_tags.html" %} {% load humanize %}
 <div class="oh-tabs oh-wrapper">
     <ul class="oh-tabs__tablist">
         <li class="oh-tabs__tab" data-target="#reimbursement_tab">
@@ -130,7 +130,7 @@
                                             {{req.installments}}
                                         </div>
                                         <div data-cell-index="5" class="oh-sticky-table__td">
-                                        {{req.loan_amount}}
+                                        {{req.loan_amount|floatformat|intcomma}}
                                         </div>
                                         <div data-cell-index="6" class="oh-sticky-table__td">
                                         {{req.description}}

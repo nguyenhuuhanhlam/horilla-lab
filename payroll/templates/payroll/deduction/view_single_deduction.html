@@ -1,4 +1,4 @@
-{% load i18n %} {% load yes_no %} {% load static %}
+{% load i18n %} {% load yes_no %} {% load static %} {% load humanize %}
 {% if messages %}
     <div class="oh-wrapper">
         {% for message in messages %}
@@ -84,9 +84,9 @@
                 {% else %}
                     {% if deduction.is_fixed %}
                         {% if position == "prefix" %}
-                            <span class="oh-timeoff-modal__stat-count">{{currency}} {{deduction.amount}}</span>
+                            <span class="oh-timeoff-modal__stat-count">{{currency}} {{deduction.amount|floatformat|intcomma}}</span>
                         {% else %}
-                            <span class="oh-timeoff-modal__stat-count">{{deduction.amount}} {{currency}}</span>
+                            <span class="oh-timeoff-modal__stat-count">{{deduction.amount|floatformat|intcomma}} {{currency}}</span>
                         {% endif %}
                     {% else %}
                         <span class="oh-timeoff-modal__stat-count">{% trans "Employer Rate :" %} {{deduction.employer_rate}}% {% trans "of" %} {{deduction.get_based_on_display}}</span>

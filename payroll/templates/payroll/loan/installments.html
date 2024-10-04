@@ -1,4 +1,4 @@
-{% load i18n payrollfilters %}
+{% load i18n payrollfilters %} {% load humanize %}
 
 <div class="oh-modal__dialog-header">
     <h2 class="oh-modal__dialog-title" id="objectDetailsModalLabel">
@@ -74,13 +74,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <b>{% trans "Total Amount" %} :</b> <div>{{loan.loan_amount}} </div>
+                    <b>{% trans "Total Amount" %} :</b> <div>{{loan.loan_amount|floatformat|intcomma}} </div>
                 </div>
                 <div class="col-md-4">
-                    <b>{% trans "Paid Amount" %} :</b><div> {{installments|paid_amount}}</div>
+                    <b>{% trans "Paid Amount" %} :</b><div> {{installments|paid_amount|floatformat|intcomma}}</div>
                 </div>
                 <div class="col-md-4">
-                    <b>{% trans "Balance Amount" %} :</b> <div>{{loan.loan_amount|balance_amount:installments}} </div>
+                    <b>{% trans "Balance Amount" %} :</b> <div>{{loan.loan_amount|balance_amount:installments|floatformat|intcomma}} </div>
                 </div>
             </div>
         </div>
@@ -174,7 +174,7 @@
                         {{loan.settled_date.date}}
                     </div>
                     <div class="oh-sticky-table__td" align="center">
-                        {{loan.loan_amount|balance_amount:installments}}
+                        {{loan.loan_amount|balance_amount:installments}} 
                     </div>
                     <div class="oh-sticky-table__td" align="center">
                         <span title="Loan Settled">

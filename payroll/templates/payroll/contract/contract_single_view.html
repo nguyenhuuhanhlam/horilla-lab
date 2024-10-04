@@ -1,4 +1,4 @@
-{% load i18n %} {% load yes_no %} {% load static %}
+{% load i18n %} {% load yes_no %} {% load static %} {% load humanize %}
 {% if messages %}
     <div class="oh-wrapper">
         {% for message in messages %}
@@ -87,7 +87,7 @@
                 </div>
                 <div class="oh-timeoff-modal__stat" style="margin-left: 20px;">
                     <span class="oh-timeoff-modal__stat-title">{% trans "Wage" %}</span>
-                    <span class="oh-timeoff-modal__stat-count">{{contract.wage}}</span>
+                    <span class="oh-timeoff-modal__stat-count">{{contract.wage|floatformat|intcomma}}</span>
                 </div>
             </div>
             <div class="oh-timeoff-modal__stats-container mt-3 mb-3">

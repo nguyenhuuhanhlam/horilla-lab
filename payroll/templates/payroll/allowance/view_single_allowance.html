@@ -1,4 +1,4 @@
-{% load i18n %} {% load yes_no %} {% load static %}
+{% load i18n %} {% load yes_no %} {% load static %} {% load humanize %}
 {% if messages %}
     <div class="oh-wrapper">
         {% for message in messages %}
@@ -71,7 +71,7 @@
         <div class="oh-timeoff-modal__stat" style="margin-left: 20px;">
                 <span class="oh-timeoff-modal__stat-title">{% trans "Amount" %}</span>
                 {% if allowance.is_fixed %}
-                    <span class="oh-timeoff-modal__stat-count">{{allowance.amount}}</span>
+                    <span class="oh-timeoff-modal__stat-count">{{allowance.amount|floatformat|intcomma}}</span>
                 {% else %}
                     {% if allowance.based_on == "basic_pay" %}
                         <span class="oh-timeoff-modal__stat-count">{{allowance.rate}}% of {{allowance.get_based_on_display}}</span>

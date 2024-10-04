@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %}  {% load humanize %}
 {% load static %}
 {% include 'filter_tags.html' %}
 {% if messages %}
@@ -92,7 +92,7 @@
             <div data-cell-index="4" class="oh-sticky-table__td">
               {{ contract.get_wage_type_display}}
             </div>
-            <div data-cell-index="5" class="oh-sticky-table__td">{{ contract.wage}}</div>
+            <div data-cell-index="5" class="oh-sticky-table__td">{{ contract.wage|floatformat|intcomma }}</div>
             <div data-cell-index="6" class="oh-sticky-table__td">{{ contract.filing_status}}</div>
             <!-- Future updation
                 <div data-cell-index="6" class="oh-sticky-table__td" onclick="event.stopPropagation();">

@@ -1,4 +1,4 @@
-{% load i18n %} {% load yes_no %} {% load static %}
+{% load i18n %} {% load yes_no %} {% load static %}  {% load humanize %}
 {% include 'filter_tags.html' %}
 {% if messages %}
 <div class="oh-wrapper">
@@ -48,7 +48,7 @@
             <div data-cell-index="7" data-cell-title="{% trans 'Amount' %}"
               class="oh-sticky-table__th {% if request.sort_option.order == '-amount' %}arrow-up {% elif request.sort_option.order == 'amount' %}arrow-down {% else %}arrow-up-down {% endif %}"
               hx-get="{% url 'filter-allowance' %}?{{pd}}&sortby=amount"
-              hx-target="#payroll-allowance-container"
+              hx-target="#payroll-allowance-container" 
             >{% trans "Amount" %}</div>
             <div data-cell-index="8" data-cell-title="{% trans 'Based On' %}" class="oh-sticky-table__th">{% trans "Based On" %}</div>
             <div data-cell-index="9" data-cell-title="{% trans 'Rate' %}" class="oh-sticky-table__th">{% trans "Rate" %}</div>
@@ -81,7 +81,7 @@
               {{allowance.is_fixed|yesno|capfirst}}
             </div>
             <div data-cell-index="7" class="oh-sticky-table__td">
-              {% if allowance.amount %}{{allowance.amount}}{% endif %}
+              {% if allowance.amount %}{{allowance.amount|floatformat|intcomma}}{% endif %}
             </div>
             <div data-cell-index="8" class="oh-sticky-table__td">
               {% if allowance.get_based_on_display%}

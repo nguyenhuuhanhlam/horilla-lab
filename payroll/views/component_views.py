@@ -117,10 +117,6 @@ def payroll_calculation(employee, start_date, end_date):
         dict: A dictionary containing the calculated payroll components:
     """
 
-    # DEBUG
-    print("---> payroll_calculation")
-    # END-DEBUG
-
     basic_pay_details = compute_salary_on_period(employee, start_date, end_date)
     contract = basic_pay_details["contract"]
     contract_wage = basic_pay_details["contract_wage"]
@@ -150,6 +146,7 @@ def payroll_calculation(employee, start_date, end_date):
         "basic_pay": basic_pay,
         "day_dict": working_days_details,
     }
+
     # basic pay will be basic_pay = basic_pay - update_compensation_amount
     allowances = calculate_allowance(**kwargs)
 
@@ -186,6 +183,10 @@ def payroll_calculation(employee, start_date, end_date):
     total_tax_deductions = sum(
         item["amount"] for item in tax_deductions["tax_deductions"]
     )
+
+    # -->
+    
+    # --|
 
     total_deductions = (
         total_pretax_deduction
